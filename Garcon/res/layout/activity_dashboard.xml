@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<de.faap.garcon.ui.widget.DashboardLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <Button
+        android:id="@+id/home_btn_post_dish"
+        style="@style/DashboardButton"
+        android:drawableTop="@drawable/home_btn_post_dish"
+        android:text="@string/btn_post_dish" />
+
+    <Button
+        android:id="@+id/home_btn_nearby_restaurants"
+        style="@style/DashboardButton"
+        android:drawableTop="@drawable/home_btn_nearby_restaurants"
+        android:text="@string/btn_nearby_restaurants" />
+
+    <Button
+        android:id="@+id/home_btn_nearby_dishes"
+        style="@style/DashboardButton"
+        android:drawableTop="@drawable/home_btn_nearby_dishes"
+        android:text="@string/btn_nearby_dishes" />
+
+    <Button
+        android:id="@+id/home_btn_search_nearby_dish"
+        style="@style/DashboardButton"
+        android:drawableTop="@drawable/home_btn_search_nearby_dish"
+        android:text="@string/btn_search_nearby_dish" />
+
+    <Button
+        android:id="@+id/home_btn_search_restaurant"
+        style="@style/DashboardButton"
+        android:drawableTop="@drawable/home_btn_search_restaurant"
+        android:text="@string/btn_search_restaurant" />
+
+    <Button
+        android:id="@+id/home_btn_feedback"
+        style="@style/DashboardButton"
+        android:drawableTop="@drawable/home_btn_feedback"
+        android:text="@string/btn_feedback" />
+
+</de.faap.garcon.ui.widget.DashboardLayout>

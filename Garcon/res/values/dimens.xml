@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Dashboard TextSize -->
+    <dimen name="text_size_small">14sp</dimen>
+
+</resources>
