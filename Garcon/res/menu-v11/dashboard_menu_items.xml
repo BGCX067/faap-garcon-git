@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/menu_nearby"
+        android:icon="@drawable/ic_menu_map"
+        android:showAsAction="ifRoom"
+        android:title="@string/menu_nearby">
+        <menu>
+            <item
+                android:id="@+id/menu_nearby_restaurants"
+                android:title="@string/menu_restaurants"/>
+            <item
+                android:id="@+id/menu_nearby_dishes"
+                android:title="@string/menu_dishes"/>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menu_search"
+        android:icon="@drawable/ic_menu_search"
+        android:showAsAction="ifRoom"
+        android:title="@string/menu_search">
+        <menu>
+            <item
+                android:id="@+id/menu_search_restaurant"
+                android:actionViewClass="android.widget.SearchView"
+                android:showAsAction="collapseActionView"
+                android:title="@string/menu_restaurant"/>
+            <item
+                android:id="@+id/menu_search_dish"
+                android:actionViewClass="android.widget.SearchView"
+                android:showAsAction="collapseActionView"
+                android:title="@string/menu_dish"/>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menu_post_dish"
+        android:icon="@drawable/ic_menu_add"
+        android:showAsAction="ifRoom"
+        android:title="@string/menu_post_dish"/>
+
+</menu>

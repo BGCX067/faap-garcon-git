@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Global -->
     <string name="app_name">Garcon</string>
 
     <!-- Dashboard buttons -->
@@ -10,5 +11,14 @@
     <string name="btn_search_nearby_dish">Search dish</string>
     <string name="btn_search_restaurant">Search restaurant</string>
     <string name="btn_feedback">Give feedback</string>
+
+    <!-- Dashboard menu -->
+    <string name="menu_post_dish">Add dish</string>
+    <string name="menu_nearby">Show nearby…</string>
+    <string name="menu_search">Search…</string>
+    <string name="menu_restaurants">… restaurants</string>
+    <string name="menu_restaurant">… restaurant</string>
+    <string name="menu_dishes">… dishes</string>
+    <string name="menu_dish">… dish</string>
 
 </resources>
