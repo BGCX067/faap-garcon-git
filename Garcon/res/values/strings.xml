@@ -20,5 +20,7 @@
     <string name="menu_restaurant">… restaurant</string>
     <string name="menu_dishes">… dishes</string>
     <string name="menu_dish">… dish</string>
+    <string name="menu_search_restaurant_hint">Restaurant</string>
+    <string name="menu_search_dish_hint">Dish</string>
 
 </resources>
