@@ -10,5 +10,9 @@
     <string name="btn_search_nearby_dish">Search dish</string>
     <string name="btn_search_restaurant">Search restaurant</string>
     <string name="btn_feedback">Give feedback</string>
+    
+    <!-- FindRestaurantByName -->
+    <string name="find_rest_name_title">Find restaurant by name</string>
+    <string name="btn_find_rest_name_more">Set custom location</string>
 
 </resources>
