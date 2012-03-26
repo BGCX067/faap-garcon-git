@@ -4,11 +4,11 @@
     <string name="app_name">Garcon</string>
 
     <!-- Dashboard buttons -->
-    <string name="btn_post_dish">Add new dish</string>
-    <string name="btn_nearby_restaurants">Show nearby restaurants</string>
-    <string name="btn_nearby_dishes">Show available dishes near me</string>
-    <string name="btn_search_nearby_dish">Search for dish in my location</string>
-    <string name="btn_search_restaurant">Show local dishes of restaurant</string>
-    <string name="btn_feedback">Give Feedback</string>
+    <string name="btn_post_dish">Add dish</string>
+    <string name="btn_nearby_restaurants">Nearby restaurants</string>
+    <string name="btn_nearby_dishes">Nearby dishes</string>
+    <string name="btn_search_nearby_dish">Search dish</string>
+    <string name="btn_search_restaurant">Search restaurant</string>
+    <string name="btn_feedback">Give feedback</string>
 
 </resources>

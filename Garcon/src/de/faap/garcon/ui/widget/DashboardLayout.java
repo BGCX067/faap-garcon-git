@@ -55,7 +55,7 @@ public class DashboardLayout extends ViewGroup {
                         .getSize(widthMeasureSpec), MeasureSpec.AT_MOST);
         int childHeightMeasureSpec =
                 MeasureSpec.makeMeasureSpec(MeasureSpec
-                        .getSize(widthMeasureSpec), MeasureSpec.AT_MOST);
+                        .getSize(heightMeasureSpec), MeasureSpec.AT_MOST);
 
         final int count = getChildCount();
         for (int i = 0; i < count; i++) {
@@ -65,6 +65,10 @@ public class DashboardLayout extends ViewGroup {
             }
 
             child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
+
+            // Log.d("faap.garcon",
+            // "Child " + i + ": Width=" + child.getMeasuredWidth()
+            // + ", Height=" + child.getMeasuredHeight());
 
             mMaxChildWidth = Math.max(mMaxChildWidth, child.getMeasuredWidth());
             mMaxChildHeight =
