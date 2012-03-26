@@ -1,5 +1,6 @@
 package de.faap.garcon.ui;
 
+import android.content.*;
 import android.os.*;
 import android.view.*;
 import android.view.inputmethod.*;
@@ -88,7 +89,6 @@ public class DashboardActivity extends SherlockActivity {
                         setTitle(getResources()
                                 .getString(R.string.btn_feedback));
                     }
-
                 });
     }
 
@@ -115,9 +115,8 @@ public class DashboardActivity extends SherlockActivity {
 
                         @Override
                         public boolean onQueryTextSubmit(String query) {
-                            // TODO fire intent
-                            setTitle(query);
                             searchRestaurant.collapseActionView();
+                            startFindRestaurantActivity(query);
                             return false;
                         }
 
@@ -141,8 +140,6 @@ public class DashboardActivity extends SherlockActivity {
                         public boolean onQueryTextSubmit(String query) {
                             // TODO fire intent
                             setTitle(query);
-                            // TODO check if needed, when we come back from new
-                            // activity
                             searchDish.collapseActionView();
                             return true;
                         }
@@ -178,8 +175,9 @@ public class DashboardActivity extends SherlockActivity {
             // if we are on a pre-honeycomb device we can't start a searchview,
             // so we start the new activity with an empty search request
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-                // TODO fire intent
-                setTitle("leere suche");
+                // TODO autschi fragen, wie er mit leeren suchanfragen umgehen
+                // will :)
+                startFindRestaurantActivity("Der Wirt");
             }
             return true;
 
@@ -200,5 +198,11 @@ public class DashboardActivity extends SherlockActivity {
         default:
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    protected void startFindRestaurantActivity(String restName) {
+        Intent intent = new Intent(this, FindRestNameActivity.class);
+        intent.putExtra(IntentData.REST_NAME.toString(), restName);
+        startActivity(intent);
     }
 }

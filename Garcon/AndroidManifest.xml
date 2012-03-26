@@ -19,6 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.FindRestNameActivity"
+            android:label="@string/find_rest_name_title">
+        </activity>
     </application>
 
 </manifest>
