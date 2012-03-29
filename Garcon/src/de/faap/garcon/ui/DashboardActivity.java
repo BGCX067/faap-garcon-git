@@ -11,8 +11,8 @@ import com.actionbarsherlock.view.MenuItem;
 import de.faap.garcon.*;
 
 public class DashboardActivity extends SherlockActivity {
-    // keep a handle to MenuItems which have an ActionView to collapse them when
-    // needed
+    // keep a handle to MenuItems which have an ActionView to expand/collapse
+    // them when needed
     protected MenuItem searchRestaurant;
     protected MenuItem searchDish;
 
@@ -41,9 +41,7 @@ public class DashboardActivity extends SherlockActivity {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        // TODO add behaviour
-                        setTitle(getResources()
-                                .getString(R.string.btn_nearby_restaurants));
+                        startNearbyRestaurantsActivity();
                     }
 
                 });
@@ -63,9 +61,13 @@ public class DashboardActivity extends SherlockActivity {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        // TODO add behaviour
-                        setTitle(getResources()
-                                .getString(R.string.btn_search_nearby_dish));
+                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+                            // TODO fire intent
+                        } else {
+                            // collapse other search views first
+                            searchRestaurant.collapseActionView();
+                            searchDish.expandActionView();
+                        }
                     }
 
                 });
@@ -74,9 +76,13 @@ public class DashboardActivity extends SherlockActivity {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        // TODO add behaviour
-                        setTitle(getResources()
-                                .getString(R.string.btn_search_restaurant));
+                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+                            startFindRestaurantActivity("");
+                        } else {
+                            // collapse other search views first
+                            searchDish.collapseActionView();
+                            searchRestaurant.expandActionView();
+                        }
                     }
 
                 });
@@ -98,53 +104,15 @@ public class DashboardActivity extends SherlockActivity {
 
         // If we're on a phone with at least honeycomb we use the searchview
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            // configure search restaurant
+            // keep handle!
             searchRestaurant = menu.findItem(R.id.menu_search_restaurant);
-            SearchView restaurantSearchView =
-                    (SearchView) searchRestaurant.getActionView();
-            restaurantSearchView.setQueryHint(getResources()
-                    .getString(R.string.menu_search_restaurant_hint));
-            restaurantSearchView.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
-            restaurantSearchView
-                    .setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            configureRestaurantSearchView((SearchView) searchRestaurant
+                    .getActionView());
 
-                        @Override
-                        public boolean onQueryTextChange(String newText) {
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onQueryTextSubmit(String query) {
-                            searchRestaurant.collapseActionView();
-                            startFindRestaurantActivity(query);
-                            return false;
-                        }
-
-                    });
-
-            // configure search dish
+            // keep handle!
             searchDish = menu.findItem(R.id.menu_search_dish);
-            SearchView dishSearchView = (SearchView) searchDish.getActionView();
-            dishSearchView.setQueryHint(getResources()
-                    .getString(R.string.menu_search_dish_hint));
-            restaurantSearchView.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
-            dishSearchView
-                    .setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-                        @Override
-                        public boolean onQueryTextChange(String newText) {
-                            return true;
-                        }
-
-                        @Override
-                        public boolean onQueryTextSubmit(String query) {
-                            // TODO fire intent
-                            setTitle(query);
-                            searchDish.collapseActionView();
-                            return true;
-                        }
-
-                    });
+            this.configureDishSearchView((SearchView) searchDish
+                    .getActionView());
         }
 
         return true;
@@ -154,8 +122,7 @@ public class DashboardActivity extends SherlockActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
         case R.id.menu_nearby_restaurants:
-            // TODO add behaviour
-            setTitle(getResources().getString(R.string.btn_nearby_restaurants));
+            startNearbyRestaurantsActivity();
             return true;
 
         case R.id.menu_nearby_dishes:
@@ -175,9 +142,7 @@ public class DashboardActivity extends SherlockActivity {
             // if we are on a pre-honeycomb device we can't start a searchview,
             // so we start the new activity with an empty search request
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-                // TODO autschi fragen, wie er mit leeren suchanfragen umgehen
-                // will :)
-                startFindRestaurantActivity("Der Wirt");
+                startFindRestaurantActivity("");
             }
             return true;
 
@@ -204,5 +169,55 @@ public class DashboardActivity extends SherlockActivity {
         Intent intent = new Intent(this, FindRestNameActivity.class);
         intent.putExtra(IntentData.REST_NAME.toString(), restName);
         startActivity(intent);
+    }
+
+    protected void startNearbyRestaurantsActivity() {
+        Intent intent = new Intent(this, NearbyRestaurantsActivity.class);
+        startActivity(intent);
+    }
+
+    private void configureRestaurantSearchView(SearchView restaurantSearchView) {
+        restaurantSearchView.setQueryHint(getResources()
+                .getString(R.string.menu_search_restaurant_hint));
+        restaurantSearchView.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+        restaurantSearchView
+                .setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        searchRestaurant.collapseActionView();
+                        startFindRestaurantActivity(query);
+                        return false;
+                    }
+
+                });
+    }
+
+    private void configureDishSearchView(SearchView dishSearchView) {
+        dishSearchView.setQueryHint(getResources()
+                .getString(R.string.menu_search_dish_hint));
+        dishSearchView.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+        dishSearchView
+                .setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        // TODO fire intent
+                        setTitle(query);
+                        searchDish.collapseActionView();
+                        return true;
+                    }
+
+                });
     }
 }

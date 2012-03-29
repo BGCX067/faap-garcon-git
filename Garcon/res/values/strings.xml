@@ -15,6 +15,9 @@
     <!-- FindRestaurantByName -->
     <string name="find_rest_name_title">Find restaurant by name</string>
     <string name="btn_find_rest_name_more">Set custom location</string>
+    
+    <!-- NearbyRestaurants -->
+    <string name="nearby_restaurants_title">Nearby restaurants</string>
 
     <!-- Dashboard menu -->
     <string name="menu_post_dish">Add dish</string>
