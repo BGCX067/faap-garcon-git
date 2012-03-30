@@ -3,10 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <fragment
-        android:id="@+id/nearbyrest_frag_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        class="de.faap.garcon.ui.NearbyRestaurantsListFragment" />
+    <!-- Fragments will be displayed in this FrameLayout -->
+
+    <FrameLayout
+        android:id="@+id/nearbyrest_frag_container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
 
 </FrameLayout>

@@ -4,11 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.google.android.maps.MapView
-        android:id="@+id/mapview"
+    <!-- The MapView will be placed in this container by the Fragment -->
+
+    <FrameLayout
+        android:id="@+id/nearbyrestlistfrag_map_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:apiKey="0qWWE8QtyZjzSnDl0NvQG5h9-_4c9ZTlirFOJJQ"
-        android:clickable="true" />
+        android:layout_weight="1" />
+
+    <ListView
+        android:id="@+id/nearbyrestlistfrag_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
 
 </LinearLayout>
