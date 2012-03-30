@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rest_list_item_position"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/restlistitem_indicator"
+            android:padding="3dip" />
+
+        <TextView
+            android:id="@+id/restlistitem_name"
+            android:padding="3dip" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/restlistitem_distance"
+            android:padding="3dip" />
+
+        <TextView
+            android:id="@+id/restlistitem_description"
+            android:padding="3dip" />
+    </TableRow>
+
+</TableLayout>
