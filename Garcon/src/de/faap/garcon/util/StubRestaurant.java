@@ -1,6 +1,5 @@
 package de.faap.garcon.util;
 
-
 public class StubRestaurant implements IRestaurant {
 
     @Override
@@ -15,7 +14,12 @@ public class StubRestaurant implements IRestaurant {
 
     @Override
     public String getDistance() {
-        return "12km";
+        return "13,37 km";
+    }
+
+    @Override
+    public long getGlobalId() {
+        return 0;
     }
 
 }

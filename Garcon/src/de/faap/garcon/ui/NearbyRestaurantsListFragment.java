@@ -7,6 +7,7 @@ import android.widget.*;
 import com.actionbarsherlock.app.*;
 import de.faap.garcon.*;
 import de.faap.garcon.ui.widget.*;
+import de.faap.garcon.util.*;
 
 public class NearbyRestaurantsListFragment extends SherlockFragment {
     // Tag for FragmentManager
@@ -51,14 +52,10 @@ public class NearbyRestaurantsListFragment extends SherlockFragment {
     }
 
     private void setUpList(ListView lv) {
-
-        ArrayList<String> restaurants = new ArrayList<String>();
-        restaurants.add("Bistro");
-        restaurants.add("Treibhaus");
-        restaurants.add("Safari");
-        restaurants.add("Dali");
-        restaurants.add("Havanna");
-        restaurants.add("Eden");
+        ArrayList<IRestaurant> restaurants = new ArrayList<IRestaurant>();
+        for (int i = 0; i < 7; i++) {
+            restaurants.add(new StubRestaurant());
+        }
 
         lv.setAdapter(new RestaurantListAdapter(getActivity(),
                 R.layout.restaurant_list_item_position, restaurants));

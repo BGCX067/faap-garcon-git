@@ -1,7 +1,5 @@
 package de.faap.garcon.util;
 
-import android.graphics.drawable.*;
-
 public class Restaurant implements IRestaurant {
 
     @Override
@@ -23,9 +21,9 @@ public class Restaurant implements IRestaurant {
     }
 
     @Override
-    public Drawable getImage() {
+    public long getGlobalId() {
         // TODO Auto-generated method stub
-        return null;
+        return 0;
     }
 
 }

@@ -5,17 +5,17 @@ import android.content.*;
 import android.view.*;
 import android.widget.*;
 import de.faap.garcon.*;
+import de.faap.garcon.util.*;
 
 public class RestaurantListAdapter extends BaseAdapter {
 
     private Context mActivity;
     private int itemLayoutResourceId;
 
-    // TODO replace String with Restaurant as possible
-    private ArrayList<String> restaurants;
+    private ArrayList<IRestaurant> restaurants;
 
     public RestaurantListAdapter(Context context, int itemLayoutResourceId,
-            ArrayList<String> restaurants) {
+            ArrayList<IRestaurant> restaurants) {
         this.mActivity = context;
         this.itemLayoutResourceId = itemLayoutResourceId;
         this.restaurants = restaurants;
@@ -27,14 +27,13 @@ public class RestaurantListAdapter extends BaseAdapter {
     }
 
     @Override
-    public String getItem(int position) {
+    public IRestaurant getItem(int position) {
         return restaurants.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO give Restaurant a getId() Method and use this here
-        return position;
+        return restaurants.get(position).getGlobalId();
     }
 
     @Override
@@ -49,14 +48,14 @@ public class RestaurantListAdapter extends BaseAdapter {
 
         TextView Distance =
                 (TextView) v.findViewById(R.id.restlistitem_distance);
-        Distance.setText("13,37 km");
+        Distance.setText(getItem(position).getDistance());
 
         TextView Name = (TextView) v.findViewById(R.id.restlistitem_name);
-        Name.setText(getItem(position));
+        Name.setText(getItem(position).getName());
 
         TextView Description =
                 (TextView) v.findViewById(R.id.restlistitem_description);
-        Description.setText("No Description");
+        Description.setText(getItem(position).getShortDescription());
 
         return v;
     }
