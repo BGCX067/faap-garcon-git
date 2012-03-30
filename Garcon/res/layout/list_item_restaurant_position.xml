@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
 
-    <TableRow android:layout_weight="3">
+    <TableRow>
 
         <TextView
             android:id="@+id/restlistitem_indicator"
@@ -15,8 +15,7 @@
             android:padding="3dip" />
     </TableRow>
 
-    <TableRow
-        android:layout_weight="4">
+    <TableRow>
 
         <TextView
             android:id="@+id/restlistitem_distance"
@@ -28,7 +27,7 @@
             android:textSize="12sp"
             android:lines="2"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"/>
+            android:layout_weight="1"/>
     </TableRow>
 
 </TableLayout>

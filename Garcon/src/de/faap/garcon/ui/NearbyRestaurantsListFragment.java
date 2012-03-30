@@ -58,6 +58,6 @@ public class NearbyRestaurantsListFragment extends SherlockFragment {
         }
 
         lv.setAdapter(new RestaurantListAdapter(getActivity(),
-                R.layout.restaurant_list_item_position, restaurants));
+                R.layout.list_item_restaurant_position, restaurants));
     }
 }
