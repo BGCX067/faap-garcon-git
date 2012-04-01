@@ -1,6 +1,7 @@
 package de.faap.garcon.ui;
 
 import android.content.*;
+import android.location.*;
 import android.os.*;
 import android.view.*;
 import android.view.inputmethod.*;
@@ -16,14 +17,16 @@ public class DashboardActivity extends SherlockActivity {
   protected MenuItem searchRestaurant;
   protected MenuItem searchDish;
 
+  protected LocationManager mLocationManager;
+
   /** Called when the activity is first created. */
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_dashboard);
 
-    // make the home button not clickable
     getSupportActionBar().setHomeButtonEnabled(false);
+    getCoarseLocation();
 
     // add button listeners
     this.findViewById(R.id.home_btn_post_dish)
@@ -170,6 +173,43 @@ public class DashboardActivity extends SherlockActivity {
   protected void startNearbyRestaurantsActivity() {
     Intent intent = new Intent(this, NearbyRestaurantsActivity.class);
     startActivity(intent);
+  }
+
+  private void getCoarseLocation() {
+    mLocationManager = (LocationManager) this
+        .getSystemService(Context.LOCATION_SERVICE);
+
+    LocationListener mLocationListener = new LocationListener() {
+      @Override
+      public void onLocationChanged(Location location) {
+        // when we have found a new location, we stop listening
+        mLocationManager.removeUpdates(this);
+      }
+
+      @Override
+      public void onStatusChanged(String provider, int status, Bundle extras) {
+        // do nothing
+      }
+
+      @Override
+      public void onProviderEnabled(String provider) {
+        // do nothing
+      }
+
+      @Override
+      public void onProviderDisabled(String provider) {
+        // do nothing
+      }
+    };
+
+    // TODO try catch because of bug in emulator. all phones should have this
+    // service?
+    try {
+      mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+                                              0, 0, mLocationListener);
+    } catch (IllegalArgumentException e) {
+      // TODO mocklocation
+    }
   }
 
   private void configureRestaurantSearchView(SearchView restaurantSearchView) {

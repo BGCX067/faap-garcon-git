@@ -3,10 +3,12 @@ package de.faap.garcon.ui;
 import android.os.*;
 import android.support.v4.app.*;
 import com.actionbarsherlock.app.*;
+import com.actionbarsherlock.view.*;
 import com.google.android.maps.*;
 import de.faap.garcon.*;
 
 public class NearbyRestaurantsActivity extends SherlockFragmentActivity {
+
   private NearbyRestaurantsListFragment mNearbyRestaurantsListFragment;
 
   @Override
@@ -31,6 +33,13 @@ public class NearbyRestaurantsActivity extends SherlockFragmentActivity {
     }
 
     ft.commit();
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getSupportMenuInflater().inflate(R.menu.nearby_restaurants_list_menu_items,
+                                     menu);
+    return true;
   }
 
   /**

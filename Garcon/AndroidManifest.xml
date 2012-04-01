@@ -32,7 +32,8 @@
         </activity>
         <activity
             android:name=".ui.NearbyRestaurantsActivity"
-            android:label="@string/nearby_restaurants_title" >
+            android:label="@string/nearby_restaurants_title"
+            android:uiOptions="splitActionBarWhenNarrow" >
         </activity>
     </application>
 

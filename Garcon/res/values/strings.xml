@@ -11,13 +11,14 @@
     <string name="btn_search_nearby_dish">Search dish</string>
     <string name="btn_search_restaurant">Search restaurant</string>
     <string name="btn_feedback">Give feedback</string>
-    
+
     <!-- FindRestaurantByName -->
     <string name="find_rest_name_title">Find restaurant by name</string>
     <string name="btn_find_rest_name_more">Set custom location</string>
-    
+
     <!-- NearbyRestaurants -->
-    <string name="nearby_restaurants_title">Nearby restaurants</string>
+    <string name="nearby_restaurants_title">No location</string>
+    <string name="nearby_restaurants_base">Restaurants near</string>
 
     <!-- Dashboard menu -->
     <string name="menu_post_dish">Add dish</string>
@@ -29,5 +30,8 @@
     <string name="menu_dish">… dish</string>
     <string name="menu_search_restaurant_hint">Restaurant</string>
     <string name="menu_search_dish_hint">Dish</string>
+
+    <!-- NearbyRestaurants menu -->
+    <string name="menu_change_location">Change location</string>
 
 </resources>
