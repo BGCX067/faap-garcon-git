@@ -6,6 +6,17 @@
         android:icon="@drawable/ic_menu_location"
         android:showAsAction="always|withText"
         android:title="@string/menu_change_location">
+        <menu>
+            <item
+                android:id="@+id/menu_gps"
+                android:title="@string/menu_gps"/>
+            <item
+                android:id="@+id/menu_network"
+                android:title="@string/menu_network"/>
+            <item
+                android:id="@+id/menu_address"
+                android:title="@string/menu_address"/>
+        </menu>
     </item>
 
 </menu>

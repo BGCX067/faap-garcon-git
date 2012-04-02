@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="1000dp"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/addressdialog_country"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/dialog_country_hint" />
+
+    <EditText
+        android:id="@+id/addressdialog_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/dialog_city_hint" />
+
+    <EditText
+        android:id="@+id/addressdialog_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/dialog_address_hint" />
+
+    <Button
+        android:id="@+id/addressdialog_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_ok" />
+
+</LinearLayout>

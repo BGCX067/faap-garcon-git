@@ -21,6 +21,12 @@
     <string name="nearby_restaurants_base">Restaurants near</string>
     <string name="nearby_restaurants_no_locality">Restaurants near me</string>
 
+    <!-- Address Dialog -->
+    <string name="dialog_country_hint">Country</string>
+    <string name="dialog_city_hint">City</string>
+    <string name="dialog_address_hint">Address</string>
+    <string name="dialog_ok">OK</string>
+
     <!-- Dashboard menu -->
     <string name="menu_post_dish">Add dish</string>
     <string name="menu_nearby">Show nearby…</string>
@@ -34,5 +40,8 @@
 
     <!-- NearbyRestaurants menu -->
     <string name="menu_change_location">Change location</string>
+    <string name="menu_gps">via GPS</string>
+    <string name="menu_network">via network (vague)</string>
+    <string name="menu_address">via address</string>
 
 </resources>

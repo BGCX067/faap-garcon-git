@@ -6,6 +6,7 @@ import com.actionbarsherlock.app.*;
 import com.actionbarsherlock.view.*;
 import com.google.android.maps.*;
 import de.faap.garcon.*;
+import de.faap.garcon.util.*;
 
 public class NearbyRestaurantsActivity extends SherlockFragmentActivity {
 
@@ -40,6 +41,27 @@ public class NearbyRestaurantsActivity extends SherlockFragmentActivity {
     getSupportMenuInflater().inflate(R.menu.nearby_restaurants_list_menu_items,
                                      menu);
     return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+    case R.id.menu_gps:
+      CurrentLocation.getInstance().updateGPSLocation(this);
+      return true;
+
+    case R.id.menu_network:
+      CurrentLocation.getInstance().updateCoarseLocation(this);
+      return true;
+
+    case R.id.menu_address:
+      FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+      AddressDialogFragment.newInstance().show(ft, "dialog");
+      return true;
+
+    default:
+      return super.onOptionsItemSelected(item);
+    }
   }
 
   /**
