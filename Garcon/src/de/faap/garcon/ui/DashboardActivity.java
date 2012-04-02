@@ -10,6 +10,7 @@ import com.actionbarsherlock.app.*;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import de.faap.garcon.*;
+import de.faap.garcon.util.*;
 
 public class DashboardActivity extends SherlockActivity {
   // keep a handle to MenuItems which have an ActionView to expand/collapse
@@ -176,39 +177,9 @@ public class DashboardActivity extends SherlockActivity {
   }
 
   private void getCoarseLocation() {
-    mLocationManager = (LocationManager) this
-        .getSystemService(Context.LOCATION_SERVICE);
-
-    LocationListener mLocationListener = new LocationListener() {
-      @Override
-      public void onLocationChanged(Location location) {
-        // when we have found a new location, we stop listening
-        mLocationManager.removeUpdates(this);
-      }
-
-      @Override
-      public void onStatusChanged(String provider, int status, Bundle extras) {
-        // do nothing
-      }
-
-      @Override
-      public void onProviderEnabled(String provider) {
-        // do nothing
-      }
-
-      @Override
-      public void onProviderDisabled(String provider) {
-        // do nothing
-      }
-    };
-
-    // TODO try catch because of bug in emulator. all phones should have this
-    // service?
-    try {
-      mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
-                                              0, 0, mLocationListener);
-    } catch (IllegalArgumentException e) {
-      // TODO mocklocation
+    ICurrentLocation locationManager = CurrentLocation.getInstance();
+    if (!locationManager.hasLocation()) {
+      locationManager.updateCoarseLocation(this);
     }
   }
 

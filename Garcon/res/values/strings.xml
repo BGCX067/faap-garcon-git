@@ -19,6 +19,7 @@
     <!-- NearbyRestaurants -->
     <string name="nearby_restaurants_title">No location</string>
     <string name="nearby_restaurants_base">Restaurants near</string>
+    <string name="nearby_restaurants_no_locality">Restaurants near me</string>
 
     <!-- Dashboard menu -->
     <string name="menu_post_dish">Add dish</string>

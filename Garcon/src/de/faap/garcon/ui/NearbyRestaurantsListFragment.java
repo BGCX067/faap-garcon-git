@@ -1,8 +1,6 @@
 package de.faap.garcon.ui;
 
-import java.io.*;
 import java.util.*;
-import android.content.*;
 import android.location.*;
 import android.os.*;
 import android.view.*;
@@ -13,11 +11,12 @@ import de.faap.garcon.*;
 import de.faap.garcon.ui.widget.*;
 import de.faap.garcon.util.*;
 
-public class NearbyRestaurantsListFragment extends SherlockFragment {
+public class NearbyRestaurantsListFragment extends SherlockFragment implements
+    Observer {
   // Tag for FragmentManager
   public static final String TAG = "NearbyRestaurantsListFragment";
 
-  private Location mLocation;
+  private ListView mListView;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -29,42 +28,60 @@ public class NearbyRestaurantsListFragment extends SherlockFragment {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
+    // the view creates a dependency, so start observing CurrentLocation
+    CurrentLocation.getInstance().addObserver(this);
+
     View v = inflater.inflate(R.layout.fragment_nearbyrestaurantslist,
                               container, false);
 
-    setUpMap((ViewGroup) v.findViewById(R.id.nearbyrestlistfrag_map_container));
+    // init mapview
+    NearbyRestaurantsActivity.MapSingleton.mMapView.setClickable(true);
+    NearbyRestaurantsActivity.MapSingleton.mMapView
+        .setBuiltInZoomControls(true);
+    ((ViewGroup) v.findViewById(R.id.nearbyrestlistfrag_map_container))
+        .addView(NearbyRestaurantsActivity.MapSingleton.mMapView);
 
-    setUpList((ListView) v.findViewById(R.id.nearbyrestlistfrag_list_view));
+    mListView = (ListView) v.findViewById(R.id.nearbyrestlistfrag_list_view);
+
+    setContent();
 
     return v;
   }
 
-  private void setUpMap(ViewGroup container) {
-    NearbyRestaurantsActivity.MapSingleton.mMapView.setClickable(true);
-    NearbyRestaurantsActivity.MapSingleton.mMapView
-        .setBuiltInZoomControls(true);
+  @Override
+  public void onDestroyView() {
+    // dependency will get destroyed with view -> unsubscribe
+    CurrentLocation.getInstance().deleteObserver(this);
+    super.onDestroyView();
+  }
 
-    // get last know position
-    LocationManager mLocationManager = (LocationManager) getActivity()
-        .getSystemService(Context.LOCATION_SERVICE);
-    mLocation = mLocationManager
-        .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+  @Override
+  public void update(Observable observable, Object data) {
+    // called when location has changed
+    // since we're doing ui changes, we have to run this on ui thread
+    getActivity().runOnUiThread(new Runnable() {
+      @Override
+      public void run() {
+        setContent();
+      }
+    });
+  }
 
-    // set zoom and center map on location if possible
+  private void setContent() {
+    handleList();
+    handleTitle();
+    handleMap();
+  }
+
+  private void handleMap() {
     MapController mapController = NearbyRestaurantsActivity.MapSingleton.mMapView
         .getController();
     mapController.setZoom(16);
-    if (mLocation != null) {
-      Double lat = mLocation.getLatitude() * 1E6;
-      Double lng = mLocation.getLongitude() * 1E6;
-      GeoPoint geoPoint = new GeoPoint(lat.intValue(), lng.intValue());
-      mapController.setCenter(geoPoint);
-      // also set up title here
-      setUpTitle(mLocation.getLatitude(), mLocation.getLongitude());
-    }
 
-    // add MapView to the container
-    container.addView(NearbyRestaurantsActivity.MapSingleton.mMapView);
+    ICurrentLocation locationManager = CurrentLocation.getInstance();
+    if (locationManager.hasLocation()) {
+      mapController.setCenter(locationManager.getLocation());
+    }
 
     // If an exception occurs that the MapView already has a parent,
     // uncomment code below
@@ -76,26 +93,30 @@ public class NearbyRestaurantsListFragment extends SherlockFragment {
     // parent.removeView(NearbyRestaurantsActivity.MapSingleton.mMapView);
   }
 
-  private void setUpList(ListView lv) {
+  private void handleList() {
     ArrayList<IRestaurant> restaurants = new ArrayList<IRestaurant>();
     for (int i = 0; i < 7; i++) {
       restaurants.add(new StubRestaurant());
     }
 
-    lv.setAdapter(new RestaurantListAdapter(getActivity(),
+    mListView.setAdapter(new RestaurantListAdapter(getActivity(),
         R.layout.list_item_restaurant_position, restaurants));
   }
 
-  private void setUpTitle(double lat, double lng) {
-    Geocoder mGeocoder = new Geocoder(getActivity());
-    try {
-      List<Address> addresses = mGeocoder.getFromLocation(lat, lng, 1);
-      String locality = addresses.get(0).getLocality();
-      getActivity().setTitle(getActivity().getResources()
-                                 .getString(R.string.nearby_restaurants_base) +
-                                 " " + locality);
-    } catch (IOException e) {
-      getActivity().setTitle(R.string.nearby_restaurants_title);
+  private void handleTitle() {
+    ICurrentLocation locationManager = CurrentLocation.getInstance();
+    if (locationManager.hasLocation()) {
+      Address mAddress = locationManager.getAddress();
+      if (mAddress == null) {
+        getActivity()
+            .setTitle(getResources()
+                          .getString(R.string.nearby_restaurants_no_locality));
+      } else {
+        String title = getResources()
+            .getString(R.string.nearby_restaurants_base) +
+            " " + mAddress.getLocality();
+        getActivity().setTitle(title);
+      }
     }
   }
 }
