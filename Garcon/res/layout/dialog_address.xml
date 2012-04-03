@@ -9,19 +9,25 @@
         android:id="@+id/addressdialog_country"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/dialog_country_hint" />
+        android:hint="@string/dialog_country_hint"
+        android:imeOptions="actionNext"
+        android:singleLine="true" />
 
     <EditText
         android:id="@+id/addressdialog_city"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/dialog_city_hint" />
+        android:hint="@string/dialog_city_hint"
+        android:imeOptions="actionNext"
+        android:singleLine="true" />
 
     <EditText
         android:id="@+id/addressdialog_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/dialog_address_hint" />
+        android:hint="@string/dialog_address_hint"
+        android:imeOptions="actionGo"
+        android:singleLine="true" />
 
     <Button
         android:id="@+id/addressdialog_button"

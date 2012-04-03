@@ -26,6 +26,8 @@
     <string name="dialog_city_hint">City</string>
     <string name="dialog_address_hint">Address</string>
     <string name="dialog_ok">OK</string>
+    <string name="dialog_address_title">Enter location</string>
+    <string name="dialog_addresslist_title">Results for location</string>
 
     <!-- Dashboard menu -->
     <string name="menu_post_dish">Add dish</string>

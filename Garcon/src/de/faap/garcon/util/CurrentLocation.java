@@ -162,7 +162,12 @@ public class CurrentLocation extends Observable implements ICurrentLocation {
 
   private void setLocation(Address a) {
     this.mAddress = a;
-    this.isFineLocation = true;
+    // if the Address doesn't have an address line the location ist vague
+    if (a.getAddressLine(0) == null) {
+      this.isFineLocation = false;
+    } else {
+      this.isFineLocation = true;
+    }
     Double lat = a.getLatitude() * 1E6;
     Double lng = a.getLongitude() * 1E6;
     this.location = new GeoPoint(lat.intValue(), lng.intValue());

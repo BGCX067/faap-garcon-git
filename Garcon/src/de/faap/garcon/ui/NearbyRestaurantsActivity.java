@@ -26,11 +26,12 @@ public class NearbyRestaurantsActivity extends SherlockFragmentActivity {
     // show NearbyRestaurantsListFragment
     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
     mNearbyRestaurantsListFragment = (NearbyRestaurantsListFragment) getSupportFragmentManager()
-        .findFragmentByTag(NearbyRestaurantsListFragment.TAG);
+        .findFragmentByTag(FragmentTags.NearbyRestaurantsListFragment
+                               .toString());
     if (mNearbyRestaurantsListFragment == null) {
       mNearbyRestaurantsListFragment = new NearbyRestaurantsListFragment();
       ft.add(R.id.nearbyrest_frag_container, mNearbyRestaurantsListFragment,
-             NearbyRestaurantsListFragment.TAG);
+             FragmentTags.NearbyRestaurantsListFragment.toString());
     }
 
     ft.commit();
@@ -56,7 +57,8 @@ public class NearbyRestaurantsActivity extends SherlockFragmentActivity {
 
     case R.id.menu_address:
       FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-      AddressDialogFragment.newInstance().show(ft, "dialog");
+      AddressDialogFragment.newInstance()
+          .show(ft, FragmentTags.AddressDialogFragment.toString());
       return true;
 
     default:

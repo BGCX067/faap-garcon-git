@@ -13,8 +13,6 @@ import de.faap.garcon.util.*;
 
 public class NearbyRestaurantsListFragment extends SherlockFragment implements
     Observer {
-  // Tag for FragmentManager
-  public static final String TAG = "NearbyRestaurantsListFragment";
 
   private ListView mListView;
 
