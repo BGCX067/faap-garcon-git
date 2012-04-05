@@ -1,5 +1,7 @@
 package de.faap.garcon.util;
 
+import com.google.android.maps.*;
+
 public interface IRestaurant {
   public String getName();
 
@@ -8,5 +10,7 @@ public interface IRestaurant {
   public String getDistance();
 
   public long getGlobalId();
+
+  public GeoPoint getGeoPoint();
 
 }

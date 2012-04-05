@@ -1,6 +1,7 @@
 package de.faap.garcon.ui;
 
 import java.util.*;
+import android.graphics.drawable.*;
 import android.location.*;
 import android.os.*;
 import android.view.*;
@@ -15,6 +16,7 @@ public class NearbyRestaurantsListFragment extends SherlockFragment implements
     Observer {
 
   private ListView mListView;
+  private ArrayList<IRestaurant> restaurants;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,14 @@ public class NearbyRestaurantsListFragment extends SherlockFragment implements
       mapController.setCenter(locationManager.getLocation());
     }
 
+    List<Overlay> mapOverlays = NearbyRestaurantsActivity.MapSingleton.mMapView
+        .getOverlays();
+    Drawable drawable = this.getResources()
+        .getDrawable(R.drawable.ic_map_overlay);
+    RestaurantItemizedOverlay itemizedoverlay = new RestaurantItemizedOverlay(
+        drawable, getActivity(), restaurants);
+    mapOverlays.add(itemizedoverlay);
+
     // If an exception occurs that the MapView already has a parent,
     // uncomment code below
 
@@ -92,9 +102,9 @@ public class NearbyRestaurantsListFragment extends SherlockFragment implements
   }
 
   private void handleList() {
-    ArrayList<IRestaurant> restaurants = new ArrayList<IRestaurant>();
+    restaurants = new ArrayList<IRestaurant>();
     for (int i = 0; i < 7; i++) {
-      restaurants.add(new StubRestaurant());
+      restaurants.add(new StubRestaurant(i));
     }
 
     mListView.setAdapter(new RestaurantListAdapter(getActivity(),

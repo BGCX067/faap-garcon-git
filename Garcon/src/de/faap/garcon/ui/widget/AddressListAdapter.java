@@ -4,7 +4,6 @@ import java.util.*;
 import android.content.*;
 import android.location.*;
 import android.support.v4.app.*;
-import android.util.*;
 import android.view.*;
 import android.view.View.OnClickListener;
 import android.widget.*;
@@ -19,8 +18,6 @@ public class AddressListAdapter extends BaseAdapter {
   public AddressListAdapter(Context context, List<Address> addressList) {
     this.mActivity = context;
     this.addressList = addressList;
-    // TODO list always only 1 result?
-    Log.d("faap.garcon", "l=" + addressList.size());
   }
 
   @Override

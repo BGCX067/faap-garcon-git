@@ -1,5 +1,7 @@
 package de.faap.garcon.util;
 
+import com.google.android.maps.*;
+
 public class Restaurant implements IRestaurant {
 
   @Override
@@ -24,6 +26,12 @@ public class Restaurant implements IRestaurant {
   public long getGlobalId() {
     // TODO Auto-generated method stub
     return 0;
+  }
+
+  @Override
+  public GeoPoint getGeoPoint() {
+    // TODO Auto-generated method stub
+    return null;
   }
 
 }
